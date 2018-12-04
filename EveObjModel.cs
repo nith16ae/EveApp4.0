@@ -19,7 +19,7 @@ namespace EveOnlineApp
         public bool is_buy_order { get; set; }
 
         [DataMember]
-        public double price { get; set; }
+        public long price { get; set; }
 
         [DataMember]
         public int type_id { get; set; }
