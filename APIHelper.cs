@@ -30,15 +30,15 @@ namespace EveOnlineApp
                 var http = new HttpClient();
                 var url = String.Format($"https://esi.evetech.net/latest/markets/{region}/orders/?datasource=tranquility&order_type=all&page={i}");
                 var response = await http.GetAsync(url);
-                // This process takes about 1,5 minutes. Can we cut this down?
                 var jsonString = await response.Content.ReadAsStringAsync();
 
                 importedList = (List<EveObjModel>)JsonConvert.DeserializeObject<List<EveObjModel>>(jsonString);
-            if (importedList.Count > 0)
-                ListOfAllImportedLists.Add(importedList);
-            else
-                break;
-        }
+				
+				if (importedList.Count > 0)
+					ListOfAllImportedLists.Add(importedList);
+				else
+					break;
+			}
 
             return ListOfAllImportedLists;
         }

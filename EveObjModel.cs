@@ -23,6 +23,5 @@ namespace EveOnlineApp
 
         [DataMember]
         public int type_id { get; set; }
-
     }
 }

@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Interop;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
+
 /// <summary>
 /// This namespace contains the entirety of the application. 
 /// Add general stuff about the project here
@@ -28,7 +29,6 @@ namespace EveOnlineApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
-
         ObservableCollection<EveObjModel> dataList = new ObservableCollection<EveObjModel>();
 
         // instance of the APIHelper class
@@ -36,8 +36,11 @@ namespace EveOnlineApp
         // The List that contains the lists that we store the EveObjModel objets in.
         List<List<EveObjModel>> importedListOfLists = new List<List<EveObjModel>>();
 
+		// lists to contain optimised results
         List<EveObjModel> uniqueBuyList = new List<EveObjModel>();
+		List<EveObjModel> uniqueSellList = new List<EveObjModel>();
 
+		
         // Simply initializes the XAML components of the MainPage
         public MainPage()
         {
@@ -45,10 +48,9 @@ namespace EveOnlineApp
             searchBox.Visibility = Visibility.Collapsed;
             searchButton.Visibility = Visibility.Collapsed;
             restoreButton.Visibility = Visibility.Collapsed;
-
-
         }
 
+		
         // This clickHandler is where the magic happens. Everything runs through this click.
         private async void Btn_start_Click(object sender, RoutedEventArgs e)
         {
@@ -68,21 +70,22 @@ namespace EveOnlineApp
                 try
                 {
                     importedListOfLists = await APIHelper.GetData(selectedRegion);
+					
                     // If we don't get data back, we run an error prompt. 
                     if (importedListOfLists.Count <= 0)
                     {
                         DisplayErrorDialog("Could not load data from server", "It probably means that there is no data to show.");
                         btn_start.Content = "Get Data";
                     }
-
+					
+                    // If we do get data back, we populate the returnList with 2 lists, a buyList and a sellList.
                     else
-                    // If we do get data back, we populate the returnList with 2 lists, a buyList and a sellList. 
                     {
-                      
                         List<List<EveObjModel>> returnList = SplitIntoBuySellLists(importedListOfLists);
                         uniqueBuyList = CreateUniqueBuyList(returnList[0].ToList());
-                        //CreateUniqueSellList(returnList[1].ToList());
+                        uniqueSellList = CreateUniqueSellList(returnList[1].ToList());
                         DisplayItems(uniqueBuyList);
+						//TODO: write a similar method for the sell list (the one right below...this might be the harder part)
                         ProgressRing.IsActive = false;
                         ProgressRing.Visibility = Visibility.Collapsed;
                         btn_start.Content = "Get Data";
@@ -102,10 +105,9 @@ namespace EveOnlineApp
                 DisplayErrorDialog("No region detected", "You have to type in a region first!");
         }
 
+		
         private void DisplayItems(List<EveObjModel> uniqueBuyList)
         {
-
-
             foreach (EveObjModel item in uniqueBuyList)
             {
                 dataList.Add(item);
@@ -114,6 +116,7 @@ namespace EveOnlineApp
             GridViewBuy.ItemsSource = dataList;
         }
 
+		
         /// <summary>
         /// Just a method to display a prompt. 
         /// </summary>
@@ -131,6 +134,7 @@ namespace EveOnlineApp
             ContentDialogResult result = await ErrorDialog.ShowAsync();
         }
 
+		
         /// <summary>
         /// TOTAL RUNTIME: Less than 30 seconds. 
         /// Splits the objects into 2 lists, from the ~ 5 - 300 lists currently in importedList
@@ -163,19 +167,27 @@ namespace EveOnlineApp
             return returnList;
             
         }
+		
+		
         /// <summary>
-        /// TOTAL RUNTIME: More than 30 minutes, possibly hours depending on amount of data.
         /// This method create a list of unique items, i.e. the instance of each type_id that has the highest price.
         /// </summary>
         /// <param name="buyList"> buyList. Contains somewhere between 1000 - 100,000 objects. </param>
         public List<EveObjModel> CreateUniqueBuyList(List<EveObjModel> buyList)
         {
-            // About 11 minutes runtime 
             List<EveObjModel> uniqueBuyList = buyList.GroupBy(e => e.type_id).Select(g => g.Aggregate((e1, e2) => e1.price > e2.price ? e1 : e2)).ToList();
-
             return uniqueBuyList;
         }   
 
+		
+		//TODO (does this work yet?)
+		public List<EveObjModel> CreateUniqueSellList(List<EveObjModel> sellList)
+        {
+            List<EveObjModel> uniqueSellList = sellList.GroupBy(e => e.type_id).Select(g => g.Aggregate((e1, e2) => e1.price > e2.price ? e1 : e2)).ToList();
+            return uniqueSellList;
+        } 
+		
+		
         /// <summary>
         /// Code-behind method for the ComboBox containing all regions. 
         /// </summary>
@@ -188,6 +200,7 @@ namespace EveOnlineApp
             regionBox.Text = regionBox.Text.GetFirst(8);
         }
 
+		
         private void searchButton_Click(object sender, RoutedEventArgs e)
         {
             if (searchBox.Text.Trim(' ').Length < 3)
@@ -208,6 +221,7 @@ namespace EveOnlineApp
 
         }
 
+		
         private void restoreButton_Click(object sender, RoutedEventArgs e)
         {
             GridViewBuy.ItemsSource = dataList;
