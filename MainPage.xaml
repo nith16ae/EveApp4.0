@@ -11,10 +11,48 @@
 
 
     <Grid Margin="0,10,9.8,0.6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="192*"/>
+            <ColumnDefinition Width="197*"/>
+        </Grid.ColumnDefinitions>
 
-        <ProgressRing x:Name="ProgressRing" HorizontalAlignment="Left" Height="77" Margin="866,515,0,0" VerticalAlignment="Top" Width="179" Background="#03FFFFFF" Foreground="Red" FocusVisualSecondaryBrush="#99F90505" FocusVisualPrimaryBrush="#FF7F1F1F"/>
+        <ProgressRing x:Name="ProgressRing" HorizontalAlignment="Left" Height="77" Margin="290,515,0,0" VerticalAlignment="Top" Width="179" Background="#03FFFFFF" Foreground="Red" FocusVisualSecondaryBrush="#99F90505" FocusVisualPrimaryBrush="#FF7F1F1F" Grid.Column="1"/>
 
-        <GridView x:Name="GridViewBuy" IsItemClickEnabled="True" IsSwipeEnabled="true" SelectionMode="Single" Margin="43,367,421,47" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+
+        <GridView x:Name="GridViewSell" IsItemClickEnabled="True" IsSwipeEnabled="true" SelectionMode="Single" Margin="127,35,421,380" Height="288" Grid.ColumnSpan="2">
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapGrid Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="400"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="1" Text="Item Name"/>
+                        <TextBlock Grid.Column="2" Text="{Binding type_id}"/>
+                        <TextBlock Grid.Column="3" Text="{Binding price}"/>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+
+
+
+
+        </GridView>
+
+
+
+
+        <GridView x:Name="GridViewBuy" IsItemClickEnabled="True" IsSwipeEnabled="true" SelectionMode="Single" Margin="127,367,421,47" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0,10,0,10">
 
             <GridView.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -41,9 +79,9 @@
         </GridView>
 
 
-        <Button x:Name="btn_start" Content="Get data" HorizontalAlignment="Left" Height="161" Margin="777,242,0,0" VerticalAlignment="Top" Width="355" FontSize="36" Background="#33255C1F" FontWeight="Bold" Click="Btn_start_Click" BorderBrush="#33255C1F" FocusVisualPrimaryBrush="#33255C1F"/>
-        <TextBox x:Name="regionBox" HorizontalAlignment="Left" Margin="778,59,0,0" PlaceholderText="Type in region to start.." VerticalAlignment="Top" Height="47" Width="354" FontWeight="Bold" FontSize="20"/>
-        <ComboBox x:Name="dropdown_regions_box" HorizontalAlignment="Left" PlaceholderText="Pick region here" IsDropDownOpen="True" Margin="777,146,0,0" VerticalAlignment="Top" Height="50" Width="355" FontSize="20" FontWeight="Bold" SelectionChanged="dropdown_regions_box_SelectionChanged">
+        <Button x:Name="btn_start" Content="Get data" HorizontalAlignment="Left" Height="161" Margin="201,242,0,0" VerticalAlignment="Top" Width="355" FontSize="36" Background="#33255C1F" FontWeight="Bold" Click="Btn_start_Click" BorderBrush="#33255C1F" FocusVisualPrimaryBrush="#33255C1F" Grid.Column="1"/>
+        <TextBox x:Name="regionBox" HorizontalAlignment="Left" Margin="202,59,0,0" PlaceholderText="Type in region to start.." VerticalAlignment="Top" Height="47" Width="354" FontWeight="Bold" FontSize="20" Grid.Column="1"/>
+        <ComboBox x:Name="dropdown_regions_box" HorizontalAlignment="Left" PlaceholderText="Pick region here" IsDropDownOpen="True" Margin="201,146,0,0" VerticalAlignment="Top" Height="50" Width="355" FontSize="20" FontWeight="Bold" SelectionChanged="dropdown_regions_box_SelectionChanged" Grid.Column="1">
             <ComboBoxItem Content = "10000001 Derelik" Height = "100" Margin = "0,0,0,0" Width = "300" HorizontalContentAlignment = "Center" />
 
             <ComboBoxItem Content = "10000002 The Forge" Height = "100" Margin = "0,0,0,0" Width = "300" HorizontalContentAlignment = "Center" />
@@ -256,9 +294,14 @@
 
             <ComboBoxItem Content = "10000010 Tribute" Height = "100" Margin = "0,0,0,0" Width = "300" HorizontalContentAlignment = "Center" />
         </ComboBox>
-        <TextBox x:Name="searchBox" PlaceholderText="Search for specific items here..." HorizontalAlignment="Left" Height="45" Margin="780,521,0,0" Text="" VerticalAlignment="Top" Width="354" FontSize="20" FontWeight="Bold"/>
-        <Button x:Name="searchButton" Content="Search&#xD;&#xA;" HorizontalAlignment="Left" Height="49" Margin="987,585,0,0" VerticalAlignment="Top" Width="147" Click="searchButton_Click" FontSize="20" FontWeight="Bold"/>
-        <Button x:Name="restoreButton" Content="Restore Item List" HorizontalAlignment="Left" Margin="780,585,0,0" VerticalAlignment="Top" Height="49" Width="176" FontSize="20" FontWeight="Bold" Click="restoreButton_Click"/>
+        <TextBox x:Name="searchBox" PlaceholderText="Search for specific items here..." HorizontalAlignment="Left" Height="45" Margin="204,521,0,0" Text="" VerticalAlignment="Top" Width="354" FontSize="20" FontWeight="Bold" Grid.Column="1"/>
+        <Button x:Name="searchButton" Content="Search&#xD;&#xA;" HorizontalAlignment="Left" Height="49" Margin="411,585,0,0" VerticalAlignment="Top" Width="147" Click="searchButton_Click" FontSize="20" FontWeight="Bold" Grid.Column="1"/>
+        <Button x:Name="restoreButton" Content="Restore Item List" HorizontalAlignment="Left" Margin="204,585,0,0" VerticalAlignment="Top" Height="49" Width="176" FontSize="20" FontWeight="Bold" Click="restoreButton_Click" Grid.Column="1"/>
+        <GridView HorizontalAlignment="Left" VerticalAlignment="Top" Width="100"/>
+        <Border x:Name="Sell_border" BorderBrush="Black" HorizontalAlignment="Left" Height="288" Margin="127,35,0,0" VerticalAlignment="Top" Width="623" RequestedTheme="Dark" BorderThickness="3,3,3,3" Grid.ColumnSpan="2"/>
+        <Border x:Name="Buy_border" BorderBrush="Black" HorizontalAlignment="Left" Height="289" Margin="127,367,0,0" VerticalAlignment="Top" Width="623" BorderThickness="3,3,3,3" RequestedTheme="Dark" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="Sell_label" HorizontalAlignment="Left" Margin="32,59,0,0" Text="Sell offers:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="80"/>
+        <TextBlock x:Name="Buy_label" HorizontalAlignment="Left" Margin="32,387,0,0" Text="Buy offers:" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="83"/>
 
     </Grid>
 </Page>

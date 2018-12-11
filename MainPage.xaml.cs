@@ -29,11 +29,14 @@ namespace EveOnlineApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        ObservableCollection<EveObjModel> dataList = new ObservableCollection<EveObjModel>();
+        //these contain item entries that are ready to be displayed
+        ObservableCollection<EveObjModel> dataList = new ObservableCollection<EveObjModel>(); //buy datalist
+        ObservableCollection<EveObjModel> dataList2 = new ObservableCollection<EveObjModel>(); //sell datalist
 
         // instance of the APIHelper class
         APIHelper APIHelper = new APIHelper();
-        // The List that contains the lists that we store the EveObjModel objets in.
+
+        // The List that contains the lists that we store the EveObjModel objects in
         List<List<EveObjModel>> importedListOfLists = new List<List<EveObjModel>>();
 
 		// lists to contain optimised results
@@ -84,8 +87,7 @@ namespace EveOnlineApp
                         List<List<EveObjModel>> returnList = SplitIntoBuySellLists(importedListOfLists);
                         uniqueBuyList = CreateUniqueBuyList(returnList[0].ToList());
                         uniqueSellList = CreateUniqueSellList(returnList[1].ToList());
-                        DisplayItems(uniqueBuyList);
-						//TODO: write a similar method for the sell list (the one right below...this might be the harder part)
+                        DisplayItems(uniqueBuyList, uniqueSellList);
                         ProgressRing.IsActive = false;
                         ProgressRing.Visibility = Visibility.Collapsed;
                         btn_start.Content = "Get Data";
@@ -106,14 +108,21 @@ namespace EveOnlineApp
         }
 
 		
-        private void DisplayItems(List<EveObjModel> uniqueBuyList)
+        //adds EveObjects fromthe polished lists to the datalists, then displays them in the gridview elements
+        private void DisplayItems(List<EveObjModel> uniqueBuyList, List<EveObjModel> uniqueSellList)
         {
             foreach (EveObjModel item in uniqueBuyList)
             {
                 dataList.Add(item);
             }
 
+            foreach (EveObjModel item in uniqueSellList)
+            {
+               dataList2.Add(item);
+            }
+
             GridViewBuy.ItemsSource = dataList;
+            GridViewSell.ItemsSource = dataList2;
         }
 
 		
@@ -143,7 +152,7 @@ namespace EveOnlineApp
         /// <returns> List<List<EveObjModel>> returnList containing 2 lists: Buy and sell items </returns>
         public List<List<EveObjModel>> SplitIntoBuySellLists (List<List<EveObjModel>> importedList)
         {
-            // The necessary instantiations of the lists needed. 
+            // The necessary instantiations of the lists needed
             List<EveObjModel> sellList = new List<EveObjModel>();
             List<EveObjModel> buyList = new List<EveObjModel>();
             List<List<EveObjModel>> returnList = new List<List<EveObjModel>>();
@@ -151,7 +160,7 @@ namespace EveOnlineApp
             // we run through every list...
             foreach (List<EveObjModel> item in importedList)
             {
-                // and every object in each list, in order to split into buy and sell objects.
+                // and every object in each list, in order to split into buy and sell objects
                 foreach (EveObjModel obj in item)
                 {
                     if (obj.is_buy_order)
@@ -160,32 +169,32 @@ namespace EveOnlineApp
                         sellList.Add(obj);
                 }
             }
-            // we then add the lists and return the list of lists. 
+
+            // we then add the lists and return the list of lists
             returnList.Add(buyList);
             returnList.Add(sellList);
 
             return returnList;
-            
         }
 		
 		
         /// <summary>
-        /// This method create a list of unique items, i.e. the instance of each type_id that has the highest price.
+        /// This method create a list of unique items, i.e. the instance of each type_id that has the highest price
         /// </summary>
         /// <param name="buyList"> buyList. Contains somewhere between 1000 - 100,000 objects. </param>
         public List<EveObjModel> CreateUniqueBuyList(List<EveObjModel> buyList)
         {
             List<EveObjModel> uniqueBuyList = buyList.GroupBy(e => e.type_id).Select(g => g.Aggregate((e1, e2) => e1.price > e2.price ? e1 : e2)).ToList();
             return uniqueBuyList;
-        }   
+        }
 
 		
-		//TODO (does this work yet?)
+        //black magicks
 		public List<EveObjModel> CreateUniqueSellList(List<EveObjModel> sellList)
         {
-            List<EveObjModel> uniqueSellList = sellList.GroupBy(e => e.type_id).Select(g => g.Aggregate((e1, e2) => e1.price > e2.price ? e1 : e2)).ToList();
+            List<EveObjModel> uniqueSellList = sellList.GroupBy(e => e.type_id).Select(g => g.Aggregate((e1, e2) => e1.price < e2.price ? e1 : e2)).ToList();
             return uniqueSellList;
-        } 
+        }
 		
 		
         /// <summary>
@@ -201,6 +210,7 @@ namespace EveOnlineApp
         }
 
 		
+        //item search functionality
         private void searchButton_Click(object sender, RoutedEventArgs e)
         {
             if (searchBox.Text.Trim(' ').Length < 3)
@@ -216,15 +226,17 @@ namespace EveOnlineApp
             else
             {
                 GridViewBuy.ItemsSource = dataList.Where(x => x.type_id.ToString() == searchBox.Text);
+                GridViewSell.ItemsSource = dataList2.Where(x => x.type_id.ToString() == searchBox.Text);
                 restoreButton.Visibility = Visibility.Visible;
             }
-
         }
 
 		
+        //button that restores everything after an item search operation
         private void restoreButton_Click(object sender, RoutedEventArgs e)
         {
             GridViewBuy.ItemsSource = dataList;
+            GridViewSell.ItemsSource = dataList2;
             restoreButton.Visibility = Visibility.Collapsed;
         }
     }
