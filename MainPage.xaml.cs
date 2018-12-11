@@ -69,48 +69,47 @@ namespace EveOnlineApp
             string selectedRegion = regionBox.Text;
             if (selectedRegion.TrimEnd(' ').Length == 8){
 
+               
                 // Try to populate the importedListOfLists with the data we get through the API, via the APIHelper class.
                 try
                 {
                     importedListOfLists = await APIHelper.GetData(selectedRegion);
-					
+                    // If we do get data back, we populate the returnList with 2 lists, a buyList and a sellList. 
+                    List<List<EveObjModel>> returnList = SplitIntoBuySellLists(importedListOfLists);
+                    uniqueBuyList = CreateUniqueBuyList(returnList[0].ToList());
+                    //CreateUniqueSellList(returnList[1].ToList());
+                    DisplayItems(uniqueBuyList);
+                    ProgressRing.IsActive = false;
+                    ProgressRing.Visibility = Visibility.Collapsed;
+                    btn_start.Content = "Get Data";
+
+                    searchBox.Visibility = Visibility.Visible;
+                    searchButton.Visibility = Visibility.Visible;
+                    
+
+                }
+                catch (Exception ex)
+                {
                     // If we don't get data back, we run an error prompt. 
                     if (importedListOfLists.Count <= 0)
                     {
-                        DisplayErrorDialog("Could not load data from server", "It probably means that there is no data to show.");
+                        DisplayErrorDialog("Could not load data from server", "It probably means that there is no data to show." + ex.Message);
                         btn_start.Content = "Get Data";
                     }
-					
-                    // If we do get data back, we populate the returnList with 2 lists, a buyList and a sellList.
-                    else
-                    {
-                        List<List<EveObjModel>> returnList = SplitIntoBuySellLists(importedListOfLists);
-                        uniqueBuyList = CreateUniqueBuyList(returnList[0].ToList());
-                        uniqueSellList = CreateUniqueSellList(returnList[1].ToList());
-                        DisplayItems(uniqueBuyList, uniqueSellList);
-                        ProgressRing.IsActive = false;
-                        ProgressRing.Visibility = Visibility.Collapsed;
-                        btn_start.Content = "Get Data";
-
-                        searchBox.Visibility = Visibility.Visible;
-                        searchButton.Visibility = Visibility.Visible;
-                    }
-
-                }
-                // We should definitely add more try-catches throughout the program! 
-                catch (Exception)
-                {
-                    throw;
                 }
             }
             else
                 DisplayErrorDialog("No region detected", "You have to type in a region first!");
+
         }
 
 		
         //adds EveObjects fromthe polished lists to the datalists, then displays them in the gridview elements
         private void DisplayItems(List<EveObjModel> uniqueBuyList, List<EveObjModel> uniqueSellList)
         {
+	   
+	   try
+	   {
             foreach (EveObjModel item in uniqueBuyList)
             {
                 dataList.Add(item);
@@ -123,6 +122,17 @@ namespace EveOnlineApp
 
             GridViewBuy.ItemsSource = dataList;
             GridViewSell.ItemsSource = dataList2;
+	    }
+	    //list is null
+            catch(ArgumentNullException aNex)
+            {
+                DisplayErrorDialog("List is empty", "Please check if data is taken form the website:" + aNex.Message);
+            }
+            //general exception
+            catch(Exception ex)
+            {
+                DisplayErrorDialog("Error", "Please check DisplayItems code:" + ex.Message);
+            }
         }
 
 		
@@ -156,8 +166,10 @@ namespace EveOnlineApp
             List<EveObjModel> sellList = new List<EveObjModel>();
             List<EveObjModel> buyList = new List<EveObjModel>();
             List<List<EveObjModel>> returnList = new List<List<EveObjModel>>();
-
-            // we run through every list...
+            
+	    try
+	    {
+           	 // we run through every list...
             foreach (List<EveObjModel> item in importedList)
             {
                 // and every object in each list, in order to split into buy and sell objects
@@ -169,10 +181,26 @@ namespace EveOnlineApp
                         sellList.Add(obj);
                 }
             }
-
+            
             // we then add the lists and return the list of lists
             returnList.Add(buyList);
             returnList.Add(sellList);
+	    }
+	                //check if the lists are not null
+            catch(ArgumentNullException aNex)
+            {
+                DisplayErrorDialog("Could not create lists", "It probably means that there is no data to show:" + aNex.Message);
+            }
+            //data types do not match
+            catch(ArgumentException aEx)
+            {
+                DisplayErrorDialog("Argument types do not match","Please check if the arguments are a list:" + aEx.Message);
+            }
+            //general exception
+            catch(Exception e)
+            {
+                DisplayErrorDialog("SplitIntoBuySellLists Error", "Please check the SplitIntoBuySellLists code:" + e.Message);
+            }
 
             return returnList;
         }
@@ -192,8 +220,22 @@ namespace EveOnlineApp
         //black magicks
 		public List<EveObjModel> CreateUniqueSellList(List<EveObjModel> sellList)
         {
+	   try
+	   {
+	   
             List<EveObjModel> uniqueSellList = sellList.GroupBy(e => e.type_id).Select(g => g.Aggregate((e1, e2) => e1.price < e2.price ? e1 : e2)).ToList();
-            return uniqueSellList;
+            
+	   }
+	               catch (MissingMethodException mme)
+            {
+                DisplayErrorDialog("Missing Methods to create a list", ":" + mme.Message);
+            }
+            catch (Exception ex)
+            {
+                DisplayErrorDialog("General exception", "Please check the CreateUniquBuyList code:" + ex.Message);
+            }
+	    return uniqueSellList;
+	   
         }
 		
 		
@@ -213,22 +255,34 @@ namespace EveOnlineApp
         //item search functionality
         private void searchButton_Click(object sender, RoutedEventArgs e)
         {
-            if (searchBox.Text.Trim(' ').Length < 3)
-            {
-                searchBox.Text = "";
-                searchBox.PlaceholderText = "Enter Item Type ID, please";
-            }
-            else if (dataList.Where(x => x.type_id.ToString() == searchBox.Text).ToList().Count < 1)
-            {
-                searchBox.Text = "";
-                searchBox.PlaceholderText = "Items doesn't exist in current region";
-            }
-            else
-            {
-                GridViewBuy.ItemsSource = dataList.Where(x => x.type_id.ToString() == searchBox.Text);
-                GridViewSell.ItemsSource = dataList2.Where(x => x.type_id.ToString() == searchBox.Text);
-                restoreButton.Visibility = Visibility.Visible;
-            }
+ 	  try
+	  {
+             if (searchBox.Text.Trim(' ').Length < 3)
+             {
+                 searchBox.Text = "";
+                 searchBox.PlaceholderText = "Enter Item Type ID, please";
+             }
+             else if (dataList.Where(x => x.type_id.ToString() == searchBox.Text).ToList().Count < 1)
+             {
+                 searchBox.Text = "";
+                 searchBox.PlaceholderText = "Items doesn't exist in current region";
+             }
+             else
+             {
+                 GridViewBuy.ItemsSource = dataList.Where(x => x.type_id.ToString() == searchBox.Text);
+                 GridViewSell.ItemsSource = dataList2.Where(x => x.type_id.ToString() == searchBox.Text);
+                 restoreButton.Visibility = Visibility.Visible;
+             }
+	   }
+	   
+	   catch(ArgumentOutOfRangeException oOr)
+           {
+               DisplayErrorDialog("Input is out of range", ":" + oOr.Message);
+           }
+           catch(Exception ex)
+           {
+               DisplayErrorDialog("General exception", "Please check the searchButton_click code:" + ex.Message);
+           }
         }
 
 		
