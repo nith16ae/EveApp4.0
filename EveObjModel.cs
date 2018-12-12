@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace EveOnlineApp
 {
     /// <summary>
+    /// Author: All
     /// This is simply the members of the EveObjModel objects. The DataContract and DataMember contracts is used
     /// in coordination with the Newtonsoft.Json library. We basically use the to identify what to cast the JSON objects to. 
     /// </summary>
@@ -19,11 +20,9 @@ namespace EveOnlineApp
         [DataMember]
         public string name { get; set; }
 
-       
         [DataMember]
         public bool is_buy_order { get; set; }
 
-        //change this to decimal. It is a money transaction afterall
         [DataMember]
         public long price { get; set; }
 
