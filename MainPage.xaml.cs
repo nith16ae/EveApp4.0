@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -25,6 +25,7 @@ using Windows.UI.Xaml.Shapes;
 namespace EveOnlineApp
 {
     /// <summary>
+    /// 
     /// This is the CS-side (logic) of the MainPage (.xaml). It contains everything except the actual API call,
     /// the deserialization of the JSON objects into EveObjModel objects and the DataContract (the EveObjModel class)
     /// </summary>
@@ -40,11 +41,11 @@ namespace EveOnlineApp
         // The List that contains the lists that we store the EveObjModel objects in
         List<List<EveObjModel>> importedListOfLists = new List<List<EveObjModel>>();
 
-		// lists to contain optimised results
+        // lists to contain optimised results
         List<EveObjModel> uniqueBuyList = new List<EveObjModel>();
-		List<EveObjModel> uniqueSellList = new List<EveObjModel>();
+        List<EveObjModel> uniqueSellList = new List<EveObjModel>();
 
-		
+
         // Simply initializes the XAML components of the MainPage
         public MainPage()
         {
@@ -54,8 +55,13 @@ namespace EveOnlineApp
             restoreButton.Visibility = Visibility.Collapsed;
         }
 
-		
+
         // This clickHandler is where the magic happens. Everything runs through this click.
+        /// <summary>
+        /// Author: Nicolai Thomsen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Btn_start_Click(object sender, RoutedEventArgs e)
         {
             btn_start.Content = "";
@@ -68,7 +74,8 @@ namespace EveOnlineApp
             // Gets the region from the input text box on the MainPage.xaml. All regions are 8-digits, so
             // we check if the input is this is as well. If not, a ErrorDialog prompt is displayed.
             string selectedRegion = regionBox.Text;
-            if (selectedRegion.TrimEnd(' ').Length == 8){              
+            if (selectedRegion.TrimEnd(' ').Length == 8)
+            {
                 // Try to populate the importedListOfLists with the data we get through the API, via the APIHelper class.
                 try
                 {
@@ -102,12 +109,17 @@ namespace EveOnlineApp
                 DisplayErrorDialog("No region detected", "You have to type in a region first!");
         }
 
-		
+
         //adds EveObjects fromthe polished lists to the datalists, then displays them in the gridview elements
+        /// <summary>
+        /// Author: George Bushnell
+        /// </summary>
+        /// <param name="uniqueBuyList"></param>
+        /// <param name="uniqueSellList"></param>
         private void DisplayItems(List<EveObjModel> uniqueBuyList, List<EveObjModel> uniqueSellList)
-        {  
-	        try
-	        {
+        {
+            try
+            {
                 foreach (EveObjModel item in uniqueBuyList)
                 {
                     dataList.Add(item);
@@ -115,28 +127,29 @@ namespace EveOnlineApp
 
                 foreach (EveObjModel item in uniqueSellList)
                 {
-                dataList2.Add(item);
+                    dataList2.Add(item);
                 }
 
                 GridViewBuy.ItemsSource = dataList;
                 GridViewSell.ItemsSource = dataList2;
-	        }
+            }
 
-	        //list is null
-            catch(ArgumentNullException aNex)
+            //list is null
+            catch (ArgumentNullException aNex)
             {
                 DisplayErrorDialog("List is empty", "Please check if data is taken form the website:" + aNex.Message);
             }
 
             //general exception
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 DisplayErrorDialog("Error", "Please check DisplayItems code:" + ex.Message);
             }
         }
 
-		
+
         /// <summary>
+        /// Author: Joseph Omengan
         /// Just a method to display a prompt. 
         /// </summary>
         /// <param name="title"></param>
@@ -153,23 +166,23 @@ namespace EveOnlineApp
             ContentDialogResult result = await ErrorDialog.ShowAsync();
         }
 
-		
+
         /// <summary>
-        /// TOTAL RUNTIME: Less than 30 seconds. 
+        /// Author: Diana Abysheva
         /// Splits the objects into 2 lists, from the ~ 5 - 300 lists currently in importedList
         /// </summary>
         /// <param name="importedList"> contains the lists </param>
         /// <returns> List<List<EveObjModel>> returnList containing 2 lists: Buy and sell items </returns>
-        public List<List<EveObjModel>> SplitIntoBuySellLists (List<List<EveObjModel>> importedList)
+        public List<List<EveObjModel>> SplitIntoBuySellLists(List<List<EveObjModel>> importedList)
         {
             // The necessary instantiations of the lists needed
             List<EveObjModel> sellList = new List<EveObjModel>();
             List<EveObjModel> buyList = new List<EveObjModel>();
             List<List<EveObjModel>> returnList = new List<List<EveObjModel>>();
-            
-	        try
-	        {
-           	    // we run through every list...
+
+            try
+            {
+                // we run through every list...
                 foreach (List<EveObjModel> item in importedList)
                 {
                     // and every object in each list, in order to split into buy and sell objects
@@ -181,55 +194,73 @@ namespace EveOnlineApp
                             sellList.Add(obj);
                     }
                 }
-            
+
                 // we then add the lists and return the list of lists
                 returnList.Add(buyList);
                 returnList.Add(sellList);
-	        }
+            }
 
-	        //check if the lists are not null
-            catch(ArgumentNullException aNex)
+            //check if the lists are not null
+            catch (ArgumentNullException aNex)
             {
                 DisplayErrorDialog("Could not create lists", "It probably means that there is no data to show:" + aNex.Message);
             }
 
             //data types do not match
-            catch(ArgumentException aEx)
+            catch (ArgumentException aEx)
             {
-                DisplayErrorDialog("Argument types do not match","Please check if the arguments are a list:" + aEx.Message);
+                DisplayErrorDialog("Argument types do not match", "Please check if the arguments are a list:" + aEx.Message);
             }
 
             //general exception
-            catch(Exception e)
+            catch (Exception e)
             {
                 DisplayErrorDialog("SplitIntoBuySellLists Error", "Please check the SplitIntoBuySellLists code:" + e.Message);
             }
 
             return returnList;
         }
-		
-		
+
+
         /// <summary>
+        /// Logic author: Nicolai Thomsen
+        /// Error handling author: Joseph Omengan
         /// This method create a list of unique items, i.e. the instance of each type_id that has the highest price
         /// </summary>
         /// <param name="buyList"> buyList. Contains somewhere between 1000 - 100,000 objects. </param>
         public List<EveObjModel> CreateUniqueBuyList(List<EveObjModel> buyList)
         {
-            List<EveObjModel> uniqueBuyList = buyList.GroupBy(e => e.type_id).Select(g => g.Aggregate((e1, e2) => e1.price > e2.price ? e1 : e2)).ToList();
+            List<EveObjModel> uniqueBuyList = new List<EveObjModel>();
+
+            try
+            {
+                uniqueBuyList = buyList.GroupBy(e => e.type_id).Select(g => g.Aggregate((e1, e2) => e1.price > e2.price ? e1 : e2)).ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             return uniqueBuyList;
         }
         //DEBUG: should the method above be try-catch'd like the method below?
 
-		
-        //DEBUG: line inside the try-block doesn't work in this try-catch case...it otherwise works fine without try-catch
-		public List<EveObjModel> CreateUniqueSellList(List<EveObjModel> sellList)
-        {
-	        try
-	        {	   
-                //List<EveObjModel> uniqueSellList = sellList.GroupBy(e => e.type_id).Select(g => g.Aggregate((e1, e2) => e1.price < e2.price ? e1 : e2)).ToList();            
-	        }
 
-	        catch (MissingMethodException mme)
+        //DEBUG: line inside the try-block doesn't work in this try-catch case...it otherwise works fine without try-catch
+        /// <summary>
+        /// Author: Cliff Phan
+        /// </summary>
+        /// <param name="sellList"></param>
+        /// <returns></returns>
+        public List<EveObjModel> CreateUniqueSellList(List<EveObjModel> sellList)
+        {
+            List<EveObjModel> uniqueSellList = new List<EveObjModel>();
+            try
+            {
+               uniqueSellList = sellList.GroupBy(e => e.type_id).Select(g => g.Aggregate((e1, e2) => e1.price < e2.price ? e1 : e2)).ToList();            
+            }
+
+            catch (MissingMethodException mme)
             {
                 DisplayErrorDialog("Missing Methods to create a list", ":" + mme.Message);
             }
@@ -240,12 +271,12 @@ namespace EveOnlineApp
             }
 
             //DEBUG: temp fix - placing that line outside the try-catch
-            List<EveObjModel> uniqueSellList = sellList.GroupBy(e => e.type_id).Select(g => g.Aggregate((e1, e2) => e1.price < e2.price ? e1 : e2)).ToList();
-            return uniqueSellList;	   
+            return uniqueSellList;
         }
-		
-		
+
+
         /// <summary>
+        /// Author: Nicolai Thomsen
         /// Code-behind method for the ComboBox containing all regions. 
         /// </summary>
         /// <param name="sender"></param>
@@ -257,12 +288,17 @@ namespace EveOnlineApp
             regionBox.Text = regionBox.Text.GetFirst(8);
         }
 
-		
+
         //item search functionality
+        /// <summary>
+        /// Author: Cliff Phan
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void searchButton_Click(object sender, RoutedEventArgs e)
         {
- 	        try
-	        {
+            try
+            {
                 if (searchBox.Text.Trim(' ').Length < 3)
                 {
                     searchBox.Text = "";
@@ -281,21 +317,26 @@ namespace EveOnlineApp
                     GridViewSell.ItemsSource = dataList2.Where(x => x.type_id.ToString() == searchBox.Text);
                     restoreButton.Visibility = Visibility.Visible;
                 }
-	        }
-	   
-	        catch(ArgumentOutOfRangeException oOr)
+            }
+
+            catch (ArgumentOutOfRangeException oOr)
             {
                 DisplayErrorDialog("Input is out of range", ":" + oOr.Message);
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 DisplayErrorDialog("General exception", "Please check the searchButton_click code:" + ex.Message);
             }
         }
 
-		
+
         //button that restores everything after an item search operation
+        /// <summary>
+        /// Author: Jpseph Omengan, Diana
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void restoreButton_Click(object sender, RoutedEventArgs e)
         {
             GridViewBuy.ItemsSource = dataList;
