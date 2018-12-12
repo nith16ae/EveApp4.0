@@ -1,14 +1,14 @@
 # EveApp4.0
 Hopefully final Eve repo
 
+Basic concept:
 
-12/03/2018 Update
-TO-DO
-* Add item names (George)
-* Add try-catch blocks to everything (Joseph)
-* Add entire sell list logic (methods, GUI etc.) (Cliff)
-* (Optional) sorting of columns (Diana)
-* Fix minor front-end bugs (All)
+An UWP App that lets the user see the most lucrative deals (Best priced) on each type of item, in each region, in the Eve Online MMORPG. The app enables the user to search for specific items by name or type ID.
 
+How:
 
+We extract data from an Eve Online Open API. Then we deserialize and cast the JSON objects to local objects (EveObjModel). The objects are sorted into items supplied and items in demand. We cut the list so they only contain the most ”lucrative” instance of the different item types.
 
+Authors: See collaborators
+
+COMPE 361 - SDSU, Fall 2018. 
