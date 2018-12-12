@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace EveOnlineApp
 {
-    //?
-    //What does this do? Who wrote it?
+    //Author: Nicolai Thomsen
+    // This static helper method helps get only the region part (the part that is issued in the URL) from the dropbox list
+    // of all the regions. An example: Turns '10000002 The Forge' into '10000002'
     public static class StringExtension
     {
             public static string GetFirst(this string source, int head_length)
