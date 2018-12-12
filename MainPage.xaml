@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="EveOnlineApp.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -292,15 +292,16 @@
         <Button x:Name="restoreButton" Content="Restore Item List" HorizontalAlignment="Left" Margin="204,585,0,0" VerticalAlignment="Top" Height="49" Width="176" FontSize="20" FontWeight="Bold" Click="restoreButton_Click" Grid.Column="1"/>
         <GridView HorizontalAlignment="Left" VerticalAlignment="Top" Width="100"/>
         <Border x:Name="Sell_border" BorderBrush="Black" HorizontalAlignment="Left" Height="260" Margin="127,59,0,0" VerticalAlignment="Top" Width="623" RequestedTheme="Dark" BorderThickness="3,3,3,3" Grid.ColumnSpan="2"/>
-        <Border x:Name="Buy_border" BorderBrush="Black" HorizontalAlignment="Left" Height="260" Margin="127,387,0,0" VerticalAlignment="Top" Width="623" BorderThickness="3,3,3,3" RequestedTheme="Dark" Grid.ColumnSpan="2"/>
-        <TextBlock x:Name="Sell_label" HorizontalAlignment="Left" Margin="32,59,0,0" Text="Sell to:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="80"/>
-        <TextBlock x:Name="Buy_label" HorizontalAlignment="Left" Margin="32,387,0,0" Text="Buy from:" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="83"/>
-        <TextBlock x:Name="Sell_item_name" HorizontalAlignment="Left" Margin="171,24,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="Sell_item_id" HorizontalAlignment="Left" Margin="365,24,0,0" Text="Type ID" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="Sell_price" HorizontalAlignment="Left" Margin="566,24,0,0" Text="Price" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <TextBlock x:Name="Buy_item_name" HorizontalAlignment="Left" Margin="171,356,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="Buy_item_id" HorizontalAlignment="Left" Margin="365,356,0,0" Text="Type ID" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="Buy_price" HorizontalAlignment="Left" Margin="566,356,0,0" Text="Price" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Border x:Name="Buy_border" BorderBrush="Black" HorizontalAlignment="Left" Height="260" Margin="127,373,0,0" VerticalAlignment="Top" Width="623" BorderThickness="3,3,3,3" RequestedTheme="Dark" Grid.ColumnSpan="2"/>
+
+        <TextBlock x:Name="Sell_label" FontWeight="Bold" HorizontalAlignment="Left" Margin="33,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="92"><Run Text=" "/><Run Text="Sell to /"/><LineBreak/><Run Text=" In demand"/></TextBlock>
+        <TextBlock x:Name="Buy_label" FontWeight="Bold" HorizontalAlignment="Left" Margin="33,373,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="86"><Run Text="Buy from"/><Run Text=" / "/><LineBreak/><Run Text="In supply"/></TextBlock>
+        <TextBlock x:Name="Sell_item_name" FontWeight="Bold" HorizontalAlignment="Left" Margin="171,24,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="Sell_item_id" FontWeight="Bold" HorizontalAlignment="Left" Margin="365,24,0,0" Text="Type ID" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="Sell_price" FontWeight="Bold" HorizontalAlignment="Left" Margin="566,24,0,0" Text="Price" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="Buy_item_name" FontWeight="Bold" HorizontalAlignment="Left" Margin="171,0,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Center"/>
+        <TextBlock x:Name="Buy_item_id" FontWeight="Bold" HorizontalAlignment="Left" Margin="365,0,0,0" Text="Type ID" TextWrapping="Wrap" VerticalAlignment="Center"/>
+        <TextBlock x:Name="Buy_price" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,0" Text="Price" TextWrapping="Wrap" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Page>
