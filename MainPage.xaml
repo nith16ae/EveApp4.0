@@ -45,7 +45,7 @@
         </GridView>
 
 
-        <GridView x:Name="GridViewBuy" IsItemClickEnabled="True" IsSwipeEnabled="true" SelectionMode="Single" Margin="127,387,421,56" Grid.ColumnSpan="2" BorderThickness="0,10,0,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <GridView x:Name="GridViewBuy" IsItemClickEnabled="True" IsSwipeEnabled="true" SelectionMode="Single" Margin="127,373,421.2,56" Grid.ColumnSpan="2" BorderThickness="0,10,0,10">
 
             <GridView.ItemsPanel>
                 <ItemsPanelTemplate>
