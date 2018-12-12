@@ -19,9 +19,11 @@ namespace EveOnlineApp
         [DataMember]
         public string name { get; set; }
 
+       
         [DataMember]
         public bool is_buy_order { get; set; }
 
+        //change this to decimal. It is a money transaction afterall
         [DataMember]
         public long price { get; set; }
 

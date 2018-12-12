@@ -293,8 +293,8 @@
         <GridView HorizontalAlignment="Left" VerticalAlignment="Top" Width="100"/>
         <Border x:Name="Sell_border" BorderBrush="Black" HorizontalAlignment="Left" Height="260" Margin="127,59,0,0" VerticalAlignment="Top" Width="623" RequestedTheme="Dark" BorderThickness="3,3,3,3" Grid.ColumnSpan="2"/>
         <Border x:Name="Buy_border" BorderBrush="Black" HorizontalAlignment="Left" Height="260" Margin="127,387,0,0" VerticalAlignment="Top" Width="623" BorderThickness="3,3,3,3" RequestedTheme="Dark" Grid.ColumnSpan="2"/>
-        <TextBlock x:Name="Sell_label" HorizontalAlignment="Left" Margin="32,59,0,0" Text="Sell to:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="80"/>
-        <TextBlock x:Name="Buy_label" HorizontalAlignment="Left" Margin="32,387,0,0" Text="Buy from:" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="83"/>
+        <TextBlock x:Name="Sell_label" HorizontalAlignment="Left" Margin="32,59,0,0" Text="Sell orders:" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="80"/>
+        <TextBlock x:Name="Buy_label" HorizontalAlignment="Left" Margin="32,387,0,0" Text="Buy orders:" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="83"/>
         <TextBlock x:Name="Sell_item_name" HorizontalAlignment="Left" Margin="171,24,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock x:Name="Sell_item_id" HorizontalAlignment="Left" Margin="365,24,0,0" Text="Type ID" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock x:Name="Sell_price" HorizontalAlignment="Left" Margin="566,24,0,0" Text="Price" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2"/>

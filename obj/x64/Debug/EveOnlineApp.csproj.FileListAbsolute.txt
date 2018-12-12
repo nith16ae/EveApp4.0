@@ -227,3 +227,4 @@ E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\qualifie
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\MultipleQualifiersPerDimensionFound.txt
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\ProjectArchitectures.txt
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\EveOnlineApp.build.appxrecipe
+E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\EveOnlineApp.csprojAssemblyReference.cache
