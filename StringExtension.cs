@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace EveOnlineApp
 {
-
+    //?
+    //What does this do? Who wrote it?
     public static class StringExtension
     {
             public static string GetFirst(this string source, int head_length)

@@ -343,5 +343,10 @@ namespace EveOnlineApp
             GridViewSell.ItemsSource = dataList2;
             restoreButton.Visibility = Visibility.Collapsed;
         }
+
+        private void Sell_label_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
