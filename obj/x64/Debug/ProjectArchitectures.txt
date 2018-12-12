@@ -1,0 +1,1 @@
+E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\EveOnlineApp.csproj;x64
