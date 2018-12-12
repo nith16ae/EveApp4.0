@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +13,11 @@ namespace EveOnlineApp
 {
     public class APIHelper
     {
+        /// <summary>
+        /// Author: Nicolai Thomsen
+        /// </summary>
+        /// <param name="region"></param>
+        /// <returns></returns>
         // TOTAL RUNTIME: 1:37 (Average)
         // This async Task method carres out the API call, and pulls the data, then deserializes all of it into EveObjModel objects. 
         public async static Task<List<List<EveObjModel>>> GetData(string region)
@@ -33,12 +38,12 @@ namespace EveOnlineApp
                 var jsonString = await response.Content.ReadAsStringAsync();
 
                 importedList = (List<EveObjModel>)JsonConvert.DeserializeObject<List<EveObjModel>>(jsonString);
-				
-				if (importedList.Count > 0)
-					ListOfAllImportedLists.Add(importedList);
-				else
-					break;
-			}
+
+                if (importedList.Count > 0)
+                    ListOfAllImportedLists.Add(importedList);
+                else
+                    break;
+            }
 
             return ListOfAllImportedLists;
         }
