@@ -225,6 +225,7 @@ namespace EveOnlineApp
         /// <summary>
         /// Logic author: Nicolai Thomsen
         /// Error handling author: Joseph Omengan
+        /// stackoverflow source:https://stackoverflow.com/questions/53495531/how-to-minimize-run-time-with-large-data-set-make-list-of-unique-objects-from-l
         /// This method create a list of unique items, i.e. the instance of each type_id that has the highest price
         /// </summary>
         /// <param name="buyList"> buyList. Contains somewhere between 1000 - 100,000 objects. </param>
@@ -252,6 +253,7 @@ namespace EveOnlineApp
         //DEBUG: line inside the try-block doesn't work in this try-catch case...it otherwise works fine without try-catch
         /// <summary>
         /// Author: Cliff Phan
+        /// stackoverflow source:https://stackoverflow.com/questions/53495531/how-to-minimize-run-time-with-large-data-set-make-list-of-unique-objects-from-l
         /// </summary>
         /// <param name="sellList"></param>
         /// <returns></returns>
