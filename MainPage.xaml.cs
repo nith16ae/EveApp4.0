@@ -236,10 +236,13 @@ namespace EveOnlineApp
             {
                 uniqueBuyList = buyList.GroupBy(e => e.type_id).Select(g => g.Aggregate((e1, e2) => e1.price > e2.price ? e1 : e2)).ToList();
             }
-            catch (Exception)
+            catch (MissingMethodException mme)
             {
-
-                throw;
+                DisplayErrorDialog("Missing Methods to create a list", ":" + mme.Message);
+            }
+            catch (Exception ex)
+            {
+                DisplayErrorDialog("General exception", "Please check the CreateUniquBuyList code:" + ex.Message);
             }
             return uniqueBuyList;
         }
@@ -267,7 +270,7 @@ namespace EveOnlineApp
 
             catch (Exception ex)
             {
-                DisplayErrorDialog("General exception", "Please check the CreateUniquBuyList code:" + ex.Message);
+                DisplayErrorDialog("General exception", "Please check the CreateUniquSellList code:" + ex.Message);
             }
 
             //DEBUG: temp fix - placing that line outside the try-catch
