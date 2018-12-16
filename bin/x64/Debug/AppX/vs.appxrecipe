@@ -31,13 +31,13 @@
     <AppXManifest Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-12-12T04:07:43.428</Modified>
+      <Modified>2018-12-12T23:54:10.720</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\EveOnlineApp.exe">
       <PackagePath>entrypoint\EveOnlineApp.exe</PackagePath>
-      <Modified>2018-12-12T04:07:41.635</Modified>
+      <Modified>2018-12-12T23:54:09.845</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\George Bushnell\.nuget\packages\microsoft.csharp\4.3.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -555,15 +555,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\EveOnlineApp.xr.xml">
       <PackagePath>EveOnlineApp.xr.xml</PackagePath>
-      <Modified>2018-12-12T04:07:41.351</Modified>
+      <Modified>2018-12-12T23:31:49.267</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2018-12-12T04:07:41.427</Modified>
+      <Modified>2018-12-12T23:54:09.529</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2018-12-12T04:07:41.428</Modified>
+      <Modified>2018-12-12T23:54:09.530</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.17134.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -576,7 +576,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\Core\EveOnlineApp.exe">
       <PackagePath>EveOnlineApp.exe</PackagePath>
-      <Modified>2018-12-12T04:07:43.416</Modified>
+      <Modified>2018-12-12T23:54:10.709</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

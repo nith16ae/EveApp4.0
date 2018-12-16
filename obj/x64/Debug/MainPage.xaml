@@ -294,8 +294,8 @@
         <Border x:ConnectionId='11' x:Name="Sell_border" BorderBrush="Black" HorizontalAlignment="Left" Height="260" Margin="127,59,0,0" VerticalAlignment="Top" Width="623" RequestedTheme="Dark" BorderThickness="3,3,3,3" Grid.ColumnSpan="2"/>
         <Border x:ConnectionId='12' x:Name="Buy_border" BorderBrush="Black" HorizontalAlignment="Left" Height="260" Margin="127,373,0,0" VerticalAlignment="Top" Width="623" BorderThickness="3,3,3,3" RequestedTheme="Dark" Grid.ColumnSpan="2"/>
 
-        <TextBlock x:ConnectionId='13' x:Name="Sell_label" FontWeight="Bold" HorizontalAlignment="Left" Margin="33,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="92"><Run Text=" "/><Run Text="Sell to /"/><LineBreak/><Run Text=" In demand"/></TextBlock>
-        <TextBlock x:ConnectionId='14' x:Name="Buy_label" FontWeight="Bold" HorizontalAlignment="Left" Margin="33,373,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="86"><Run Text="Buy from"/><Run Text=" / "/><LineBreak/><Run Text="In supply"/></TextBlock>
+        <TextBlock x:ConnectionId='13' x:Name="Sell_label" FontWeight="Bold" HorizontalAlignment="Left" Margin="33,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="92"                                                Text="In Supply"/>
+        <TextBlock x:ConnectionId='14' x:Name="Buy_label" FontWeight="Bold" HorizontalAlignment="Left" Margin="33,373,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="86" Text="In Demand"/>
         <TextBlock x:ConnectionId='15' x:Name="Sell_item_name" FontWeight="Bold" HorizontalAlignment="Left" Margin="171,24,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock x:ConnectionId='16' x:Name="Sell_item_id" FontWeight="Bold" HorizontalAlignment="Left" Margin="365,24,0,0" Text="Type ID" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock x:ConnectionId='17' x:Name="Sell_price" FontWeight="Bold" HorizontalAlignment="Left" Margin="566,24,0,0" Text="Price" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
