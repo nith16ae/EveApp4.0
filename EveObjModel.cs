@@ -17,6 +17,8 @@ namespace EveOnlineApp
     [DataContract]
     public class EveObjModel : IComparable<EveObjModel>
     {
+        //var names are lower case. Violating normal naming conventions because that's what the eve
+        //developers named them
         [DataMember]
         public string name { get; set; }
 
@@ -24,7 +26,7 @@ namespace EveOnlineApp
         public bool is_buy_order { get; set; }
 
         [DataMember]
-        public long price { get; set; }
+        public decimal price { get; set; }
 
         [DataMember]
         public int type_id { get; set; }

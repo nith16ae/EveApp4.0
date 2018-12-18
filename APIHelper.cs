@@ -47,5 +47,22 @@ namespace EveOnlineApp
 
             return ListOfAllImportedLists;
         }
+
+        //This method takes in an itemID makes a call to the server
+        //and then returns an object containing item values
+        public async static Task<EveItemModel> GetName(int itemId)
+        {
+            
+
+            var http = new HttpClient();
+            var url = String.Format($"https://esi.evetech.net/latest/universe/types/{itemId}/?datasource=tranquility&language=en-us");
+            var response = await http.GetAsync(url);
+            var jsonString = await response.Content.ReadAsStringAsync();
+            EveItemModel anItem = new EveItemModel();
+            anItem = (EveItemModel)JsonConvert.DeserializeObject<EveItemModel>(jsonString);
+
+
+            return anItem;
+        }
     }
 }
