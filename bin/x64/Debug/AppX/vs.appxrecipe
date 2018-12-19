@@ -30,13 +30,13 @@
     <AppXManifest Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-12-19T03:49:21.752</Modified>
+      <Modified>2018-12-19T05:24:48.021</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\EveOnlineApp.exe">
       <PackagePath>entrypoint\EveOnlineApp.exe</PackagePath>
-      <Modified>2018-12-19T03:49:21.415</Modified>
+      <Modified>2018-12-19T04:03:14.774</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\George Bushnell\.nuget\packages\microsoft.csharp\4.3.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -525,7 +525,7 @@
     <AppxPackagedFile Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-12-12T03:54:20.640</Modified>
+      <Modified>2018-12-19T05:17:09.922</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
@@ -535,12 +535,12 @@
     <AppxPackagedFile Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-12-12T03:54:20.653</Modified>
+      <Modified>2018-12-19T05:22:46.815</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-12-12T03:54:20.653</Modified>
+      <Modified>2018-12-19T05:22:46.815</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
@@ -554,15 +554,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\EveOnlineApp.xr.xml">
       <PackagePath>EveOnlineApp.xr.xml</PackagePath>
-      <Modified>2018-12-19T01:27:16.530</Modified>
+      <Modified>2018-12-19T04:03:14.563</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2018-12-19T03:49:21.121</Modified>
+      <Modified>2018-12-19T05:24:47.628</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2018-12-19T03:49:21.122</Modified>
+      <Modified>2018-12-19T05:24:47.629</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.17134.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -570,11 +570,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2018-12-19T03:38:25.278</Modified>
+      <Modified>2018-12-19T04:03:16.451</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\Core\EveOnlineApp.exe">
       <PackagePath>EveOnlineApp.exe</PackagePath>
-      <Modified>2018-12-19T03:49:21.748</Modified>
+      <Modified>2018-12-19T05:24:48.016</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

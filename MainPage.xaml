@@ -294,7 +294,7 @@
         <Border x:Name="Sell_border" BorderBrush="Black" HorizontalAlignment="Left" Height="260" Margin="127,59,0,0" VerticalAlignment="Top" Width="623" RequestedTheme="Dark" BorderThickness="3,3,3,3" Grid.ColumnSpan="2"/>
         <Border x:Name="Buy_border" BorderBrush="Black" HorizontalAlignment="Left" Height="260" Margin="127,373,0,0" VerticalAlignment="Top" Width="623" BorderThickness="3,3,3,3" RequestedTheme="Dark" Grid.ColumnSpan="2"/>
 
-        <TextBlock x:Name="Sell_label" FontWeight="Bold" HorizontalAlignment="Left" Margin="33,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="92" SelectionChanged="Sell_label_SelectionChanged" Text="In Supply"/>
+        <TextBlock x:Name="Sell_label" FontWeight="Bold" HorizontalAlignment="Left" Margin="33,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="92" Text="In Supply"/>
         <TextBlock x:Name="Buy_label" FontWeight="Bold" HorizontalAlignment="Left" Margin="33,373,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="86" Text="In Demand"/>
         <TextBlock x:Name="Sell_item_name" FontWeight="Bold" HorizontalAlignment="Left" Margin="171,24,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock x:Name="Sell_item_id" FontWeight="Bold" HorizontalAlignment="Left" Margin="365,24,0,0" Text="Type ID" TextWrapping="Wrap" VerticalAlignment="Top"/>
