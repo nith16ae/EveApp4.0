@@ -51,7 +51,7 @@ namespace EveOnlineApp
         //This method takes in an itemID makes a call to the server
         //and then returns an object containing item values
         //removed static...
-        public async  Task<EveItemModel> GetName(int itemId)
+        public async  Task<EveItemModel> GetItem(int itemId)
         {
             
 

@@ -16,6 +16,10 @@ using Windows.UI.Xaml.Interop;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+
 
 
 /// <summary>
@@ -45,6 +49,15 @@ namespace EveOnlineApp
         List<EveObjModel> uniqueBuyList = new List<EveObjModel>();
         List<EveObjModel> uniqueSellList = new List<EveObjModel>();
 
+        //ItemDatabase that will eventually save between sessions to improve run time
+        ItemDatabase data = new ItemDatabase();
+
+        const string FileName = @"../../../SavedDatabase.bin";
+
+        
+        
+        
+
 
         // Simply initializes the XAML components of the MainPage
         public MainPage()
@@ -53,18 +66,22 @@ namespace EveOnlineApp
             searchBox.Visibility = Visibility.Collapsed;
             searchButton.Visibility = Visibility.Collapsed;
             restoreButton.Visibility = Visibility.Collapsed;
+
+
+
         }
 
         //this method populates item names
         //ToDo: add in dictionary and database for performance
-        private async void PopulateItemNames(List<EveObjModel> L)
+        private async Task<int> PopulateItemNames(List<EveObjModel> L)
         {
             foreach (EveObjModel o in L)
             {
-                EveItemModel n = await APIHelper.GetName(o.type_id);
-                o.name = n.name;
-                o.name = o.name + "";
+                
+                String s = await data.GetItemName(o.type_id);
+                o.name = s;
             }
+            return 1;
         }
 
         // This clickHandler is where the magic happens. Everything runs through this click.
@@ -82,6 +99,20 @@ namespace EveOnlineApp
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
 
+
+            //attempt to save
+            /*
+            if (File.Exists(FileName))
+            {
+                //Console.WriteLine("Reading saved file");
+                Stream openFileStream = File.OpenRead(FileName);
+                BinaryFormatter deserializer = new BinaryFormatter();
+                data = (ItemDatabase)deserializer.Deserialize(openFileStream);
+                //TestLoan.TimeLastLoaded = DateTime.Now;
+                openFileStream.Close();
+            }
+            */
+
             // Gets the region from the input text box on the MainPage.xaml. All regions are 8-digits, so
             // we check if the input is this is as well. If not, a ErrorDialog prompt is displayed.
             string selectedRegion = regionBox.Text;
@@ -97,11 +128,14 @@ namespace EveOnlineApp
                     uniqueSellList = CreateUniqueSellList(returnList[1].ToList());
 
                     //add in item names here
+                    //returns int as a janky way to make sure
+                    //the task completes
 
                     //populate buy list
-                    PopulateItemNames(uniqueBuyList);
+                    int i = await PopulateItemNames(uniqueBuyList);
 
-                    PopulateItemNames(uniqueSellList);
+                    //populate sell list
+                    i = i + await  PopulateItemNames(uniqueSellList);
 
                     ///////////////////////
 
@@ -387,5 +421,58 @@ namespace EveOnlineApp
         {
 
         }
+
+        /*
+        /// <summary>
+        /// Writes the given object instance to a Json file.
+        /// <para>Object type must have a parameterless constructor.</para>
+        /// <para>Only Public properties and variables will be written to the file. These can be any type though, even other classes.</para>
+        /// <para>If there are public properties/variables that you do not want written to the file, decorate them with the [JsonIgnore] attribute.</para>
+        /// </summary>
+        /// <typeparam name="T">The type of object being written to the file.</typeparam>
+        /// <param name="filePath">The file path to write the object instance to.</param>
+        /// <param name="objectToWrite">The object instance to write to the file.</param>
+        /// <param name="append">If false the file will be overwritten if it already exists. If true the contents will be appended to the file.</param>
+        /// //from https://stackoverflow.com/questions/6115721/how-to-save-restore-serializable-object-to-from-file
+        public static void WriteToJsonFile<T>(string filePath, T objectToWrite, bool append = false) where T : new()
+        {
+            TextWriter writer = null;
+            try
+            {
+                var contentsToWriteToFile = JsonConvert.SerializeObject(objectToWrite);
+                writer = new StreamWriter(filePath, append);
+                writer.Write(contentsToWriteToFile);
+            }
+            finally
+            {
+                if (writer != null)
+                    writer.Close();
+            }
+        }
+
+        /// <summary>
+        /// Reads an object instance from an Json file.
+        /// <para>Object type must have a parameterless constructor.</para>
+        /// </summary>
+        /// <typeparam name="T">The type of object to read from the file.</typeparam>
+        /// <param name="filePath">The file path to read the object instance from.</param>
+        /// <returns>Returns a new instance of the object read from the Json file.</returns>
+        /// //from https://stackoverflow.com/questions/6115721/how-to-save-restore-serializable-object-to-from-file
+        public static T ReadFromJsonFile<T>(string filePath) where T : new()
+        {
+            TextReader reader = null;
+            try
+            {
+                reader = new StreamReader(filePath);
+                var fileContents = reader.ReadToEnd();
+                return JsonConvert.DeserializeObject<T>(fileContents);
+            }
+            finally
+            {
+                if (reader != null)
+                    reader.Close();
+            }
+        }
+        */
     }
 }
