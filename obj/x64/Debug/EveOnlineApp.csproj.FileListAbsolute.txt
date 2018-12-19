@@ -1,3 +1,13 @@
+E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\App.g.i.cs
+E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\App.g.cs
+E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\MainPage.g.i.cs
+E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\MainPage.g.cs
+E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\XamlTypeInfo.g.cs
+E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\App.xaml
+E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\MainPage.xaml
+E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\App.xbf
+E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\MainPage.xbf
+E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\XamlSaveStateFile.xml
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\App.xbf
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\MainPage.xbf
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\EveOnlineApp.xr.xml
@@ -7,6 +17,7 @@ E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\resource
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\AppxManifest.xml
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\Core\AppxManifest.xml
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\Core\EveOnlineApp.exe
+E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\EveOnlineApp.build.appxrecipe
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\Microsoft.CSharp.dll
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\System.ComponentModel.DataAnnotations.dll
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\System.Core.dll
@@ -128,16 +139,6 @@ E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\System.X
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\System.Xml.XDocument.dll
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\System.Xml.XmlDocument.dll
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\System.Xml.XmlSerializer.dll
-E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\App.g.i.cs
-E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\App.g.cs
-E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\MainPage.g.i.cs
-E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\MainPage.g.cs
-E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\XamlTypeInfo.g.cs
-E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\App.xaml
-E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\MainPage.xaml
-E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\App.xbf
-E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\MainPage.xbf
-E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\XamlSaveStateFile.xml
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\EveOnlineApp.csproj.CoreCompileInputs.cache
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\EveOnlineApp.csproj.CopyComplete
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\EveOnlineApp.exe
@@ -226,5 +227,3 @@ E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\qualifie
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\qualifiers.txt.intermediate
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\MultipleQualifiersPerDimensionFound.txt
 E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\ProjectArchitectures.txt
-E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\bin\x64\Debug\EveOnlineApp.build.appxrecipe
-E:\Libraries\Documents\College\Classes\COMPE361\EveApp4.0\obj\x64\Debug\EveOnlineApp.csprojAssemblyReference.cache

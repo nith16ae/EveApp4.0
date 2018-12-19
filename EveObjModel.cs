@@ -17,14 +17,28 @@ namespace EveOnlineApp
     [DataContract]
     public class EveObjModel : IComparable<EveObjModel>
     {
+        //var names are lower case. Violating normal naming conventions because that's what the eve
+        //developers named them
         [DataMember]
-        public string name { get; set; }
+        public String name { get; set;
+
+            /*
+            get
+            {
+                return name;
+            }
+            set 
+            {
+                name = await getItemNameAsync();
+            }
+            */
+        }
 
         [DataMember]
         public bool is_buy_order { get; set; }
 
         [DataMember]
-        public long price { get; set; }
+        public decimal price { get; set; }
 
         [DataMember]
         public int type_id { get; set; }
@@ -33,18 +47,48 @@ namespace EveOnlineApp
         {
             string toStringyString = "";
 
+            
+            
+
             if (this.is_buy_order)
+            {
                 toStringyString = $"Item {this.name} (Type ID: {this.type_id}) is a buy item. Cost; {this.price}";
+            }
             else
+            {
                 toStringyString = $"Item {this.name.ToString()} (Type ID: {this.type_id.ToString()}) is a sell item. Cost: {this.price.ToString()}";
+            }
 
             return toStringyString;
         }
+
+
+        //populates the item name by calling the server.
+        //Will modify later
+        /*
+        public async Task<string> getItemNameAsync()
+        {
+            APIHelper ap = new APIHelper();
+            String s = "";
+            EveItemModel item = await ap.GetName(this.type_id);
+            s = item.name;
+
+            return s;
+        }
+
+        public async void setItemName()
+        {
+            name = await getItemNameAsync();
+        }
+        */
+        
 
         public override int GetHashCode()
         {
             return this.GetHashCode();
         }
+
+        
 
         public override bool Equals(object obj)
         {

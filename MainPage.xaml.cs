@@ -16,6 +16,10 @@ using Windows.UI.Xaml.Interop;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+
 
 
 /// <summary>
@@ -45,6 +49,15 @@ namespace EveOnlineApp
         List<EveObjModel> uniqueBuyList = new List<EveObjModel>();
         List<EveObjModel> uniqueSellList = new List<EveObjModel>();
 
+        //ItemDatabase that will eventually save between sessions to improve run time
+        ItemDatabase data = new ItemDatabase();
+
+        const string FileName = @"../../../SavedDatabase.bin";
+
+        
+        
+        
+
 
         // Simply initializes the XAML components of the MainPage
         public MainPage()
@@ -53,8 +66,23 @@ namespace EveOnlineApp
             searchBox.Visibility = Visibility.Collapsed;
             searchButton.Visibility = Visibility.Collapsed;
             restoreButton.Visibility = Visibility.Collapsed;
+
+
+
         }
 
+        //this method populates item names
+        //ToDo: add in dictionary and database for performance
+        private async Task<int> PopulateItemNames(List<EveObjModel> L)
+        {
+            foreach (EveObjModel o in L)
+            {
+                
+                String s = await data.GetItemName(o.type_id);
+                o.name = s;
+            }
+            return 1;
+        }
 
         // This clickHandler is where the magic happens. Everything runs through this click.
         /// <summary>
@@ -71,6 +99,20 @@ namespace EveOnlineApp
             ProgressRing.IsActive = true;
             ProgressRing.Visibility = Visibility.Visible;
 
+
+            //attempt to save
+            /*
+            if (File.Exists(FileName))
+            {
+                //Console.WriteLine("Reading saved file");
+                Stream openFileStream = File.OpenRead(FileName);
+                BinaryFormatter deserializer = new BinaryFormatter();
+                data = (ItemDatabase)deserializer.Deserialize(openFileStream);
+                //TestLoan.TimeLastLoaded = DateTime.Now;
+                openFileStream.Close();
+            }
+            */
+
             // Gets the region from the input text box on the MainPage.xaml. All regions are 8-digits, so
             // we check if the input is this is as well. If not, a ErrorDialog prompt is displayed.
             string selectedRegion = regionBox.Text;
@@ -84,6 +126,19 @@ namespace EveOnlineApp
                     List<List<EveObjModel>> returnList = SplitIntoBuySellLists(importedListOfLists);
                     uniqueBuyList = CreateUniqueBuyList(returnList[0].ToList());
                     uniqueSellList = CreateUniqueSellList(returnList[1].ToList());
+
+                    //add in item names here
+                    //returns int as a janky way to make sure
+                    //the task completes
+
+                    //populate buy list
+                    int i = await PopulateItemNames(uniqueBuyList);
+
+                    //populate sell list
+                    i = i + await  PopulateItemNames(uniqueSellList);
+
+                    ///////////////////////
+
                     DisplayItems(uniqueBuyList, uniqueSellList);
 
                     ProgressRing.IsActive = false;
@@ -274,6 +329,14 @@ namespace EveOnlineApp
             {
                 DisplayErrorDialog("General exception", "Please check the CreateUniquSellList code:" + ex.Message);
             }
+
+            //attempts to set all the item names
+            /*
+            foreach (EveObjModel o in uniqueSellList)
+            {
+                o.setItemName();
+            }
+            */
 
             //DEBUG: temp fix - placing that line outside the try-catch
             return uniqueSellList;
