@@ -55,6 +55,17 @@ namespace EveOnlineApp
             restoreButton.Visibility = Visibility.Collapsed;
         }
 
+        //this method populates item names
+        //ToDo: add in dictionary and database for performance
+        private async void PopulateItemNames(List<EveObjModel> L)
+        {
+            foreach (EveObjModel o in L)
+            {
+                EveItemModel n = await APIHelper.GetName(o.type_id);
+                o.name = n.name;
+                o.name = o.name + "";
+            }
+        }
 
         // This clickHandler is where the magic happens. Everything runs through this click.
         /// <summary>
@@ -84,6 +95,16 @@ namespace EveOnlineApp
                     List<List<EveObjModel>> returnList = SplitIntoBuySellLists(importedListOfLists);
                     uniqueBuyList = CreateUniqueBuyList(returnList[0].ToList());
                     uniqueSellList = CreateUniqueSellList(returnList[1].ToList());
+
+                    //add in item names here
+
+                    //populate buy list
+                    PopulateItemNames(uniqueBuyList);
+
+                    PopulateItemNames(uniqueSellList);
+
+                    ///////////////////////
+
                     DisplayItems(uniqueBuyList, uniqueSellList);
 
                     ProgressRing.IsActive = false;
@@ -241,6 +262,16 @@ namespace EveOnlineApp
 
                 throw;
             }
+
+            //attempts to set all the item names
+            /*
+            foreach(EveObjModel o in uniqueBuyList)
+            {
+                 o.setItemName();
+                
+            }
+            */
+
             return uniqueBuyList;
         }
         //DEBUG: should the method above be try-catch'd like the method below?
@@ -269,6 +300,14 @@ namespace EveOnlineApp
             {
                 DisplayErrorDialog("General exception", "Please check the CreateUniquBuyList code:" + ex.Message);
             }
+
+            //attempts to set all the item names
+            /*
+            foreach (EveObjModel o in uniqueSellList)
+            {
+                o.setItemName();
+            }
+            */
 
             //DEBUG: temp fix - placing that line outside the try-catch
             return uniqueSellList;
