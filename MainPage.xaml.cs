@@ -42,6 +42,8 @@ namespace EveOnlineApp
         // instance of the APIHelper class
         APIHelper APIHelper = new APIHelper();
 
+        //Create an instance of the fileRW here:
+
         // The List that contains the lists that we store the EveObjModel objects in
         List<List<EveObjModel>> importedListOfLists = new List<List<EveObjModel>>();
 

@@ -19,11 +19,25 @@ namespace EveOnlineApp
         [field: NonSerialized()]
         APIHelper APIHelper = new APIHelper();
 
+
+        //Default Constructor for the item Database
         public ItemDatabase()
         {
             ItemDic = new Dictionary<int, EveItemModel>();   
         }
 
+        //this constructor uses a pre-existing item database
+        //as a starting point
+        //As in the filewriter is working and a file is found
+        public ItemDatabase(Dictionary<int, EveItemModel> existingDatabase)
+        {
+            ItemDic = existingDatabase;
+        }
+
+        //returns a string of the item name from a specified
+        //typeID 
+        //If the item doesn't exist it then calls AddITEM
+        //which is an asynchronous task
         public async Task<string> GetItemName(int typeID)
         {
             String s = "";
@@ -43,6 +57,8 @@ namespace EveOnlineApp
             return s;
         }
 
+        //polls the webserver for the item name of the TypeID
+        //and adds it to the dictionary
         public async Task<int> AddItem(int typeID)
         {
             EveItemModel n = await APIHelper.GetItem(typeID);
